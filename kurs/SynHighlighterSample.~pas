@@ -9,7 +9,7 @@ WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
 the specific language governing rights and limitations under the License.
 
 Code template generated with SynGen.
-The original code is: SynHighlighterSample.pas, released 2012-11-23.
+The original code is: SynHighlighterSample.pas, released 2012-12-01.
 Description: Syntax Parser/Highlighter
 The initial author of this file is Сергей.
 Copyright (c) 2012, all rights reserved.
@@ -62,8 +62,9 @@ type
     tkNumber,
     tkSpace,
     tkString,
-    tkSymbol,
-    tkSymbol1,
+    tkSymbolRaz,
+    tkSymbolSk,
+    tkSymbolZn,
     tkUnknown);
 
   TRangeState = (rsUnKnown, rsBraceComment, rsString);
@@ -96,8 +97,9 @@ type
     fNumberAttri: TSynHighlighterAttributes;
     fSpaceAttri: TSynHighlighterAttributes;
     fStringAttri: TSynHighlighterAttributes;
-    fSymbolAttri: TSynHighlighterAttributes;
-    fSymbol1Attri: TSynHighlighterAttributes;
+    fSymbolRazAttri: TSynHighlighterAttributes;
+    fSymbolSkAttri: TSynHighlighterAttributes;
+    fSymbolZnAttri: TSynHighlighterAttributes;
     function KeyHash(ToHash: PChar): Integer;
     function KeyComp(const aKey: string): Boolean;
     function Func23: TtkTokenKind;
@@ -109,8 +111,9 @@ type
     function Func88: TtkTokenKind;
     procedure IdentProc;
     procedure NumberProc;
-    procedure SymbolProc;
-    procedure Symbol1Proc;
+    procedure SymbolRazProc;
+    procedure SymbolSkProc;
+    procedure SymbolZnProc;
     procedure UnknownProc;
     function AltFunc: TtkTokenKind;
     procedure InitIdent;
@@ -152,8 +155,9 @@ type
     property NumberAttri: TSynHighlighterAttributes read fNumberAttri write fNumberAttri;
     property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri write fSpaceAttri;
     property StringAttri: TSynHighlighterAttributes read fStringAttri write fStringAttri;
-    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri write fSymbolAttri;
-    property Symbol1Attri: TSynHighlighterAttributes read fSymbol1Attri write fSymbol1Attri;
+    property SymbolRazAttri: TSynHighlighterAttributes read fSymbolRazAttri write fSymbolRazAttri;
+    property SymbolSkAttri: TSynHighlighterAttributes read fSymbolSkAttri write fSymbolSkAttri;
+    property SymbolZnAttri: TSynHighlighterAttributes read fSymbolZnAttri write fSymbolZnAttri;
   end;
 
 implementation
@@ -172,7 +176,9 @@ const
 {$ENDIF}
   SYNS_FilterSample = 'All files';
   SYNS_LangSample = 'Sample';
-  SYNS_AttrSymbol1 = 'Symbol1';
+  SYNS_AttrSymbolRaz = 'SymbolRaz';
+  SYNS_AttrSymbolSk = 'SymbolSk';
+  SYNS_AttrSymbolZn = 'SymbolZn';
 
 var
   Identifiers: array[#0..#255] of ByteBool;
@@ -321,8 +327,9 @@ begin
       #14..#32 : fProcTable[I] := SpaceProc;
       'A'..'Z','a'..'z': fProcTable[I] := IdentProc;
       '0'..'9': fProcTable[I] := NumberProc;
-      '-', '+', '*','^','/','(',')','[',']','=': fProcTable[I] := SymbolProc;
-      '>',';',',',':': fProcTable[I] := Symbol1Proc;
+      '>',';',',',':','.': fProcTable[I] := SymbolRazProc;
+      '(',')','[',']': fProcTable[I] := SymbolSkProc;
+      '-', '+', '*','^','/','=': fProcTable[I] := SymbolZnProc;
     else
       fProcTable[I] := UnknownProc;
     end;
@@ -424,11 +431,11 @@ begin
 
   fKeyAttri := TSynHighLighterAttributes.Create(SYNS_AttrSASMKey);
   fKeyAttri.Style := [fsBold];
-  fKeyAttri.Foreground := clBlue;
+  fKeyAttri.Foreground := clHotLight;
   AddAttribute(fKeyAttri);
 
   fNumberAttri := TSynHighLighterAttributes.Create(SYNS_AttrNumber);
-  fNumberAttri.Foreground := clBlack;
+  fNumberAttri.Foreground := clBlue;
   AddAttribute(fNumberAttri);
 
   fSpaceAttri := TSynHighLighterAttributes.Create(SYNS_AttrSpace);
@@ -439,14 +446,19 @@ begin
   fStringAttri.Foreground := clFuchsia;
   AddAttribute(fStringAttri);
 
-  fSymbolAttri := TSynHighLighterAttributes.Create(SYNS_AttrSymbol);
-  fSymbolAttri.Foreground := clGreen;
-  AddAttribute(fSymbolAttri);
+  fSymbolRazAttri := TSynHighLighterAttributes.Create(SYNS_AttrSymbolRaz);
+  fSymbolRazAttri.Style := [fsBold];
+  fSymbolRazAttri.Foreground := clMaroon;
+  AddAttribute(fSymbolRazAttri);
 
-  fSymbol1Attri := TSynHighLighterAttributes.Create(SYNS_AttrSymbol1);
-  fSymbol1Attri.Style := [fsBold];
-  fSymbol1Attri.Foreground := clMaroon;
-  AddAttribute(fSymbol1Attri);
+  fSymbolSkAttri := TSynHighLighterAttributes.Create(SYNS_AttrSymbolSk);
+  fSymbolSkAttri.Style := [fsBold];
+  fSymbolSkAttri.Foreground := clGreen;
+  AddAttribute(fSymbolSkAttri);
+
+  fSymbolZnAttri := TSynHighLighterAttributes.Create(SYNS_AttrSymbolZn);
+  fSymbolZnAttri.Foreground := clRed;
+  AddAttribute(fSymbolZnAttri);
 
   SetAttributesOnChange(DefHighlightChange);
   InitIdent;
@@ -477,21 +489,26 @@ begin
   inc(Run);
   fTokenID := tkNumber;
   while Identifiers[fLine[Run]] do
- 
 
     inc(Run);
- 
+
 end;
 
-procedure TSynSampleSyn.SymbolProc;
+procedure TSynSampleSyn.SymbolRazProc;
 begin
-  fTokenID  := tkSymbol;
+  fTokenID  := tkSymbolRaz;
   Inc( Run );
 end;
 
-procedure TSynSampleSyn.Symbol1Proc;
+procedure TSynSampleSyn.SymbolSkProc;
 begin
-  fTokenID  := tkSymbol1;
+  fTokenID  := tkSymbolSk;
+  Inc( Run );
+end;
+
+procedure TSynSampleSyn.SymbolZnProc;
+begin
+  fTokenID  := tkSymbolZn;
   Inc( Run );
 end;
 
@@ -527,7 +544,6 @@ begin
     SYN_ATTR_KEYWORD    : Result := fKeyAttri;
     SYN_ATTR_STRING     : Result := fStringAttri;
     SYN_ATTR_WHITESPACE : Result := fSpaceAttri;
-    SYN_ATTR_SYMBOL     : Result := fSymbolAttri;
   else
     Result := nil;
   end;
@@ -566,8 +582,9 @@ begin
     tkNumber: Result := fNumberAttri;
     tkSpace: Result := fSpaceAttri;
     tkString: Result := fStringAttri;
-    tkSymbol: Result := fSymbolAttri;
-    tkSymbol1: Result := fSymbol1Attri;
+    tkSymbolRaz: Result := fSymbolRazAttri;
+    tkSymbolSk: Result := fSymbolSkAttri;
+    tkSymbolZn: Result := fSymbolZnAttri;
     tkUnknown: Result := fIdentifierAttri;
   else
     Result := nil;

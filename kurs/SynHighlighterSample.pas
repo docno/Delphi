@@ -9,7 +9,7 @@ WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
 the specific language governing rights and limitations under the License.
 
 Code template generated with SynGen.
-The original code is: SynHighlighterSample.pas, released 2012-11-24.
+The original code is: SynHighlighterSample.pas, released 2012-12-01.
 Description: Syntax Parser/Highlighter
 The initial author of this file is Сергей.
 Copyright (c) 2012, all rights reserved.
@@ -327,7 +327,7 @@ begin
       #14..#32 : fProcTable[I] := SpaceProc;
       'A'..'Z','a'..'z': fProcTable[I] := IdentProc;
       '0'..'9': fProcTable[I] := NumberProc;
-      '>',';',',',':': fProcTable[I] := SymbolRazProc;
+      '>',';',',',':','.': fProcTable[I] := SymbolRazProc;
       '(',')','[',']': fProcTable[I] := SymbolSkProc;
       '-', '+', '*','^','/','=': fProcTable[I] := SymbolZnProc;
     else

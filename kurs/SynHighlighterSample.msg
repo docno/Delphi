@@ -60,7 +60,7 @@ fTokenID  := tkSymbolZn;
   Inc( Run );
 EndProc
 
-'>',';',',',':'::SymbolRaz
+'>',';',',',':','.'::SymbolRaz
 BeginProc
 fTokenID  := tkSymbolRaz;
   Inc( Run );

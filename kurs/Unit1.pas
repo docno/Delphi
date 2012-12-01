@@ -87,7 +87,7 @@ end;
 
 function  Oshibka1(slovo:string;proverka:string;otvet:string;synedit2:tsynedit):Boolean;
 begin
-if (slovo='') then begin
+if (slovo=proverka) then begin
 result:=false;
 synedit2.Lines.Add(otvet) end else result:=true;
 end;
@@ -116,6 +116,15 @@ begin
 if (slovo=proverka) then begin
 result:=false;
 synedit2.Lines.Add(otvet) end else result:=true;
+end;
+
+function  Oshibka5(slovo:string;proverka:string;otvet:string;synedit2:tsynedit):Boolean;
+begin
+if (slovo=proverka) then result:=true else
+begin
+result:=false;
+synedit2.Lines.Add(otvet);
+end;
 end;
 
 
@@ -349,21 +358,23 @@ end;
 
        //отлов ошибок построчно
      if (
-         ((oshibka4(Trans('program','end.',strsrc,''),'L','ошибка: нету слова1',synedit2)=true) and
-          (oshibka4(Trans('program','end.',strsrc,''),'R','ошибка: нету слова2',synedit2)=true))and
+         ((oshibka4(Trans('program','end.',strsrc,''),'L','ошибка: нету слова "program"',synedit2)=true) and
+          (oshibka4(Trans('program','end.',strsrc,''),'R','ошибка: нету слова "end."',synedit2)=true))and
 
-         ((oshibka4(name,'L','нет пробела program и name',synedit2)=true) and
-          (oshibka1(name,'','error: "program NAME;" not found',synedit2)=true)) and
+         ((oshibka4(name,'L','ошибка: нет пробела между "program" и "name_program"',synedit2)=true) and
+          (oshibka1(name,'','ошибка: отсутсвует "name_program"',synedit2)=true)) and
 
-       ((oshibka4(Trans('given','koef',strsrc,''),'L','ошибка: нету слова given',synedit2)=true)  and
-          (oshibka1(Trans('given','>',strsrc,''),'','error: пустой name_sys_diff not found',synedit2)=true) and
-          (oshibka4(dudu,'L','ошибка: нету пробела между given и имя',synedit2)=true)) and
+       ((oshibka4(Trans('given','koef',strsrc,''),'L','ошибка: нету слова "given"',synedit2)=true)  and
+          (oshibka1(Trans('given','>',strsrc,''),'','ошибка: отсутствует name_sys_diff',synedit2)=true) and
+          (oshibka4(dudu,'L','ошибка: нету пробела между "given" и "name_sys_diff"',synedit2)=true)) and
 
-         ((oshibka4(znam,'L','нет дифура числ или знамен',synedit2)=true)  and
-          (oshibka4(Chisl,'R','нет дифура числ или знамен',synedit2)=true)) and
+         ((oshibka4(znam,'L','ошибка: некоректное "name_sys_diff". только "dxdt"',synedit2)=true)  and
+          (oshibka4(Chisl,'R','ошибка: некоректоное "name_sys_diff". только "dxdt"',synedit2)=true)) and
 
-         ((oshibka1(Chisl,'','error1: нет числ',synedit2)=true) and
-          (oshibka1(znam,'','error2: нет знам',synedit2)=true)) and
+         ((oshibka1(Chisl,'','ошибка: нет числителя в "name_sys_diff"',synedit2)=true) and
+          (oshibka1(znam,'','ошибка: нет знаменателя "name_sys_diff"',synedit2)=true) and
+          (Oshibka5(chisl,'x','ошибка: некоректный числитель. только "x"',synedit2)=true)and
+          (Oshibka5(znam,'t','ошибка: некоректный знаментаель. только "t"',synedit2)=true)) and
 
          ((oshibka1(Trans('given '+dudu,'koef',strsrc,''),'','error:  System diff - emperty',synedit2)=true) and
           (oshibka1(Trans('>',';',sysdyf,''),'','error: ">name_diff(i)=[equation];..." not found',synedit2)=true))and
@@ -372,7 +383,25 @@ end;
         (oshibka1(koef,'','koef -emprty',synedit2)=true)and
         (oshibka1(Trans('>',';',koef,''),'','error: not found Koef',synedit2)=true))
 
-          
+             {
+
+         ((oshibka1(sysdyf,'','error: "koef" not found. or System diff - emperty',synedit2)=true) and
+          (oshibka1(Trans('>',';',sysdyf,''),'','error: ">name_diff(i)=[equation];..." not found',synedit2)=true)) and
+
+         ((oshibka1(koef,'','error: "cauchy" not found.  or koef -emprty',synedit2)=true) and
+          (oshibka1(Trans('>',';',koef,''),'','error: not found Koef',synedit2)=true)) and
+
+         ((oshibka1(cauchy,'','error: "method" not found.  or cauchy -emprty',synedit2)=true) and
+         (oshibka1(Trans('>',';',cauchy,''),'','error: not found Cauchy',synedit2)=true) and
+         (oshibka1(Trans('h=',';',cauchy,''),'','ошибка: пустой шаг',synedit2)<>false) and
+         (oshibka3(Trans('h=',';',cauchy,''),'ошибка: шаг не число',synedit2)=true)) and
+
+         ((oshibka1(method,'','error: "get" not found.  or method -emprty',synedit2)=true) and
+           (oshibka1(Trans('>',';',method,''),'','error: ">method;" not found ',synedit2)=true) and
+           (oshibka2(Trans('>',';',method,''),'ode45','euler','ode45euler','eulerode45','error: method "'+(Trans('>',';',method,''))+'" not found',synedit2)=true)) and
+
+         ((oshibka1(get,'','error: "end."not found.  or get -emprty',synedit2)=true)and
+          (oshibka1(Trans('>',';',get,''),'','error: ">plot [x(1),...x(i)];" not found',synedit2)=true))  }
          ) then
 
 
@@ -556,3 +585,4 @@ end;
 
 
 end.
+

@@ -372,25 +372,7 @@ end;
         (oshibka1(koef,'','koef -emprty',synedit2)=true)and
         (oshibka1(Trans('>',';',koef,''),'','error: not found Koef',synedit2)=true))
 
-             {
-
-         ((oshibka1(sysdyf,'','error: "koef" not found. or System diff - emperty',synedit2)=true) and
-          (oshibka1(Trans('>',';',sysdyf,''),'','error: ">name_diff(i)=[equation];..." not found',synedit2)=true)) and
-
-         ((oshibka1(koef,'','error: "cauchy" not found.  or koef -emprty',synedit2)=true) and
-          (oshibka1(Trans('>',';',koef,''),'','error: not found Koef',synedit2)=true)) and
-
-         ((oshibka1(cauchy,'','error: "method" not found.  or cauchy -emprty',synedit2)=true) and
-         (oshibka1(Trans('>',';',cauchy,''),'','error: not found Cauchy',synedit2)=true) and
-         (oshibka1(Trans('h=',';',cauchy,''),'','ошибка: пустой шаг',synedit2)<>false) and
-         (oshibka3(Trans('h=',';',cauchy,''),'ошибка: шаг не число',synedit2)=true)) and
-
-         ((oshibka1(method,'','error: "get" not found.  or method -emprty',synedit2)=true) and
-           (oshibka1(Trans('>',';',method,''),'','error: ">method;" not found ',synedit2)=true) and
-           (oshibka2(Trans('>',';',method,''),'ode45','euler','ode45euler','eulerode45','error: method "'+(Trans('>',';',method,''))+'" not found',synedit2)=true)) and
-
-         ((oshibka1(get,'','error: "end."not found.  or get -emprty',synedit2)=true)and
-          (oshibka1(Trans('>',';',get,''),'','error: ">plot [x(1),...x(i)];" not found',synedit2)=true))  }
+          
          ) then
 
 

@@ -1,0 +1,71 @@
+<InitMainVars>
+PS_DIRECTORY ** Not Set ** 
+ argv[0] is 'E:\Fable\MathCAD 14 M035 Rus\dsrc\i486_nt\obj\ptcsetup.exe'
+ Try to figure it out now 
+ Path1 NOW: E:\Fable\MathCAD 14 M035 Rus\dsrc\i486_nt\obj\ptcsetup.exe
+Now look for: E:\Fable\MathCAD 14 M035 Rus\dsrc\text\compiled_resource\ps_default_resources.dll
+Found E:\Fable\MathCAD 14 M035 Rus\dsrc\text\compiled_resource\ps_default_resources.dll
+ Resource file exists at: E:\Fable\MathCAD 14 M035 Rus\dsrc\text\compiled_resource\ps_default_resources.dll
+ So, set PS_DIRECTORY to: E:\Fable\MathCAD 14 M035 Rus\dsrc
+PTC_CDHOME ** Not Set ** 
+Now look for: E:\Fable\MathCAD 14 M035 Rus\ptc_inst\cdmaster.ptc
+ So, set PTC_CDHOME to: E:\Fable\MathCAD 14 M035 Rus
+<PsGetVar> Failed for: PTC_CDHOME
+DPS_DIRECTORY ** Not Set ** 
+ So, set DPS_DIRECTORY to: E:\Fable\MathCAD 14 M035 Rus\dsrc
+DONE <InitMainVars>
+<PsCd::PsCd> (E:\Fable\MathCAD 14 M035 Rus)
+<PsGetVar> Failed for: PS_INF_PATH
+<PsGetVar> Failed for: PS_INF_FILE
+ptc_inf_path: E:\Fable\MathCAD 14 M035 Rus\ptc_inst\ptc.inf
+<PsGetVar> Failed for: PS_ARCH_DB
+<PsInfFile::ReadInf> 'E:\Fable\MathCAD 14 M035 Rus\ptc_inst\ptc.inf'
+PsCD::LoadSummary
+PsInfFile::ReadInf ignoreCluster = 1
+Start of ReadInf time stamp: Пт ноя 09 16:48:22 Московское время (зима) 2012
+End of ReadInf time stamp: Пт ноя 09 16:48:22 Московское время (зима) 2012
+Init Translation/Message system
+
+ ---------------------------------- 
+ |      Welcome to PTC.Setup      | 
+ ---------------------------------- 
+ Time: Пт ноя 09 16:48:22 Московское время (зима) 2012
+ Could not get DomainName 
+ Host: ������-��
+ Machine type: i486_nt
+ User: Сергей
+ CurDir: E:\Fable\MathCAD 14 M035 Rus
+ PTC.Setup build info: Jul 21 2009 19:50:44
+ get_internal_version(): L-03-34
+ --------------------------------------------
+
+<PsGetVar> Failed for: PS_CDMASTER
+<PsCd::readResfile> cdmaster.ptc
+<PsCd::addProduct> (flexlm)
+    <PsInstall::PsInstall> loadpoint: 
+    <PsInstall::Refresh> Path: ''
+Returning from PsInstall::Refresh because Path.IsEmpty
+<PsProduct::SetLoadpoint> new loadpoint: 
+ConvertDBAdd __PSF_COMMENT__ '//'
+<PsProduct::readResfile> E:\Fable\MathCAD 14 M035 Rus\ptc_inst\flexlm.ptc
+PsPackage:: Setting up ezActions for pkg: uninstall
+PsPackage:: Setting up ezActions for pkg: ptcutil
+current flexver: 6.1
+default flexver: 6.1
+<PsCd::addProduct> (mathcad)
+    <PsInstall::PsInstall> loadpoint: 
+    <PsInstall::Refresh> Path: ''
+Returning from PsInstall::Refresh because Path.IsEmpty
+<PsProduct::SetLoadpoint> new loadpoint: 
+ConvertDBAdd __PSF_COMMENT__ '//'
+<PsProduct::readResfile> E:\Fable\MathCAD 14 M035 Rus\ptc_inst\mathcad.ptc
+set_unihttp CB to PsDownloadAuth
+ClickWrapLA: clickwrap_la
+set_unihttp CB to PsDownloadAuth
+ConvertDBAdd __HOSTID__ '00-23-5A-0A-06-A1'
+ConvertDBAdd __PRODUCT__ 'Mathcad'
+ConvertDBAdd __RELNUM__ '14'
+ConvertDBAdd __DCODE__ 'M035'
+<SetDlgBrowse> ScreenStudentLic.StudentLicFileBrowse - ScreenStudentLic.StudentLicFile type:2
+DirList.GetSize() = 114
+Generic InitFunc: ScreenDftCmds

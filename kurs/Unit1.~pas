@@ -39,6 +39,7 @@ type
     procedure SynEdit1Change(Sender: TObject);
     procedure DelAllinFolder(const dir: string);
 
+
   private
     { Private declarations }
   public

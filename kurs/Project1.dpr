@@ -7,7 +7,7 @@ uses
 
 {$R *.res}
 
-{master branch}
+{master branch1}
 begin
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);

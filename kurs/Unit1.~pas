@@ -59,26 +59,6 @@ uses Unit2,  SynHighlighterSample;
 
 {$R *.dfm}
 
-procedure TForm1.DelAllinFolder(const dir: string);
-Var SR:TSearchRec;
-    FindRes:Integer;
-begin
-FindRes:=FindFirst(dir+'*.*',faAnyFile,SR);
-While FindRes=0 do
-   begin
-    if ((SR.Attr and faDirectory)=faDirectory)and(SR.Name<>'.')and(SR.Name<>'..') then
-      begin
-        DelAllinFolder(dir+SR.Name+'\');
-        RemoveDir(dir+SR.Name);
-      end;
-    if ((SR.Attr and faDirectory)<>faDirectory)and(SR.Name<>'.')and(SR.Name<>'..') then
-        DeleteFile(dir+SR.Name);
- 
-      FindRes:=FindNext(SR);
-   end;
-FindClose(SR); 
-end;
-
 
 function  LastSimvDel(stroka:string):string;
 //удалить последний символ

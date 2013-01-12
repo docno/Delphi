@@ -11,7 +11,6 @@ uses
 {master branch1}
 =======
 {Delphi branch1}
->>>>>>> origin/new_f2
 begin
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);

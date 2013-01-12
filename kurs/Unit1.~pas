@@ -390,7 +390,7 @@ end;
      begin
 
      //но перед эти подчищаем в ней все
-    DelAllinFolder(ExtractFilePath(Application.ExeName)+'data\');
+    DelAllinFolder(ExtractFilePath(Application.ExeName)+'data\');//удаление
      try
 
   f:=TStringList.Create();

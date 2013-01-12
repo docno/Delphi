@@ -8,6 +8,11 @@ uses
 {$R *.res}
 
 {master branch1}
+=======
+=======
+{Delphi branch1}
+{Delphi branch}
+>>>>>>> 8a60edd... --изменения1
 begin
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);
